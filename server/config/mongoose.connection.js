@@ -5,7 +5,12 @@ const config = require('./variables.express');
 mongoose.Promise = global.Promise;
 
 // setup initial connection to local dev mongo database
-mongoose.connect(config.MONGODB.URI);
+mongoose.connect(config.MONGODB.URI, (err, database) => {
+  if (err) {
+    console.log('error connecting to database...ERROR:', err);
+    process.exit(1);
+  }
+});
 
 // exports.MONGOLAB_URI = process.env.MONGOLAB_URI || global.MONGOLAB_URI || (process.env.NODE_ENV === 'production' ?)
 
@@ -22,4 +27,4 @@ const db = mongoose.connection
   .on('error', console.error.bind(console, 'connection error'))
   .once('open', () => {
     console.log('Connected to mongodb');
-  });
+});
