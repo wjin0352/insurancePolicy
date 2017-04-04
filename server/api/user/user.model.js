@@ -6,7 +6,6 @@ const userSchema = mongoose.Schema({
   age: { type: Number, required: true },
   gender: { type: String, required: true },
   location: { type: String, required: true },
-  healthCondition: { type: String, required: true },
   policy: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Policy' }],
   created: { type: Date, default: Date.now }
 })

@@ -3,11 +3,12 @@ import { browserHistory } from 'react-router';
 
 export function createPolicy(data) {
   console.log('DATA ====', data);
+
   return (dispatch) => {
     console.log('data ', data)
     axios.post('/api/users', data)
       .then(response => {
-        console.log('RESPONSE!!!!!!! ', response);
+        console.log('action RESPONSE!!!!!!! ', response);
         return dispatch(policySuccess(response.data));
       })
       .catch(err => {

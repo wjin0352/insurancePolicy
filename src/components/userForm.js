@@ -49,15 +49,9 @@ const conditions = ['allergies', 'sleep apnea', 'heart disease', 'high cholester
 class UserForm extends Component {
   constructor(props) {
     super(props);
-    this.handleOnChange = this.handleOnChange.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
   
-  handleOnChange = (data) => {
-    let checkedArray = [];
-    console.log('data=====', data);
-  }
-
   handleFormSubmit = (data) => {
     this.props.createPolicy(data);
   }
@@ -69,7 +63,6 @@ class UserForm extends Component {
         <Field name="firstName" label="First Name" component={renderFieldInput} type="text" placeholder="first name" />
         <Field name="age" label="Age" component={renderFieldInput} type="text" placeholder="age"/>
         <Field name="location" label="location" component={renderFieldInput} type="text" placeholder="location"/>
-        <Field name="healthCondition" label="Health Condition" component={renderFieldInput} type="text" placeholder="health condition"/>
         <div>
           <label>Gender</label>
           <div>
@@ -85,7 +78,7 @@ class UserForm extends Component {
               return (
                 <div>
                   <label>{name}: </label>
-                  <Field name={`selectBoxes.${name}`} onChange={this.handleOnChange} label={name} component="input" type="checkbox" id={name}/>
+                  <Field name={`healthConditions.${name}`} label={name} component="input" type="checkbox" id={name}/>
                 </div>
               )
             })
@@ -100,42 +93,5 @@ export default connect(null, { createPolicy })(reduxForm({
   form: 'userForm'
 })(UserForm));
 
+// reference to nested redux form data https://medium.com/@jtbennett/using-redux-form-to-handle-user-input-1392826f2c6d
 
-{/*<Field name="days" label='Days' component={({ input, label }) => {
-  return (
-    <div className='days-container'>
-      <span className='label'>{label}</span>
-      {[ 'mon', 'tue', 'wed', 'thu', 'friday'].map((name, index) =>
-          <Checkbox label={name} checked={input.value[name]} key={index} onChange={checked => {
-            const setter = {};
-            setter[name]=checked;
-            input.onChange({...input.value, ...setter})}} />
-      )}
-    </div>
-  )
-}}/>*/}
-
-  /*<div>
-            <label>allergies: </label>
-            <Field name="allergies" component="input" label="allergies" type="checkbox"/>
-          </div>
-          <div>
-            <label>sleep apnea: </label>
-            <Field name="sleepApnea" component="input" type="checkbox"/>
-          </div>
-          <div>
-            <label>heart disease: </label>
-            <Field name="heartDisease" component="input" type="checkbox"/>
-          </div>
-          <div>
-            <label>high cholesterol: </label>
-            <Field name="highChol" component="input" type="checkbox"/>
-          </div>
-          <div>
-            <label>asthma: </label>
-            <Field name="asthma" component="input" type="checkbox"/>
-          </div>
-          <div>
-            <label>none: </label>
-            <Field name="none" component="input" type="checkbox"/>
-          </div>*/

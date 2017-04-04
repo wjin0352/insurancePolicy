@@ -21,14 +21,14 @@ UserController.prototype.getUsers = function(req, res) {
 }
 
 UserController.prototype.createUser = function(req, res) {
+  const { firstName, age, gender, location, healthConditions } = req.body;
+
   return new Promise((resolve, reject) => {
-    const { firstName, age, gender, location, healthCondition } = req.body;
     User.create({
       firstName,
       age,
       gender,
-      location,
-      healthCondition
+      location      
     }, (err, user) => {
       if (err) {
         reject(err);
@@ -38,7 +38,7 @@ UserController.prototype.createUser = function(req, res) {
     })
   })
   .then((user) => {
-    console.log('.then => ',user)
+    console.log(healthConditions)
     const newPolicy = new Policy;
     newPolicy.policyCost = newPolicy.fiveYearsCost(user.age),
     newPolicy.eligibility = newPolicy.checkAge(user.age);
@@ -46,7 +46,10 @@ UserController.prototype.createUser = function(req, res) {
     newPolicy.policyHolder = user._id;
     
     newPolicy.eastCoastDiscount(user.location);
-    newPolicy.healthConditionCost(user.healthCondition);
+
+    for(var condition in healthConditions) {
+      newPolicy.healthConditionCost(condition)
+    }
     newPolicy.genderDiscount(newPolicy.userGender);
     newPolicy.save()
       .then((newPolicy) => {
