@@ -46,6 +46,7 @@ mongoose.Promise = global.Promise;  // es6 implementation of promises
 // before is exectuted once compared to beforeEach
 before((done) => {
   mongoose.connect('mongodb://localhost/users_test');
+  // mongoose.createConnection('mongodb://localhost/users_test');
   mongoose.connection
   // watch for mongoose to emit even 'open' then run console log
     .once('open', () => { done(); })
@@ -56,7 +57,9 @@ before((done) => {
 
 // Hook created to empty out our database for each test, so find our collection of users and drop them
 beforeEach((done) => {
-  const { users, policies } = mongoose.connection.collections;
+  // const { users, policies } = mongoose.connection.collections;
+  const users =  mongoose.connection.collections.users;
+  const policies =  mongoose.connection.collections.policies;
   users.drop(() => {
     policies.drop(() => {
       done();

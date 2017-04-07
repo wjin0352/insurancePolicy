@@ -20,3 +20,5 @@ console.log('process.env.PORT: ', process.env.PORT);
 app.listen(PORT, function() {
   console.log(variables.EXPRESS_LISTEN_MESSAGE + variables.EXPRESS_PORT);
 });
+
+exports.app = app;

@@ -23,6 +23,7 @@
     "babel-preset-stage-1": "^6.1.18",
     "babel-register": "^6.23.0",
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "chai-jquery": "^2.0.0",
     "jquery": "^2.2.1",
     "jsdom": "^8.1.0",
