@@ -13,53 +13,13 @@ const renderFieldInput = ({ input, label, meta: { touched, error, warning } }) =
   </div>
 );
 
-const renderCheckBoxes = ({ input, meta: { touched, error, warning } }) => (
-  <div className="check_boxes">
-    <label>Health Conditions:</label>
-    <div>
-      <label>allergies: </label>
-      <Field name="allergies" component="input" type="checkbox" />
-    </div>
-    <div>
-      <label>sleep apnea: </label>
-      <Field name="sleepApnea" component="input" type="checkbox" />
-    </div>
-    <div>
-      <label>heart disease: </label>
-      <Field name="heartDisease" component="input" type="checkbox" />
-    </div>
-    <div>
-      <label>high cholesterol: </label>
-      <Field name="highChol" component="input" type="checkbox" />
-    </div>
-    <div>
-      <label>asthma: </label>
-      <Field name="asthma" component="input" type="checkbox" />
-    </div>
-    <div>
-      <label>none: </label>
-      <Field name="none" component="input" type="checkbox" />
-    </div>
-  </div>
-);
-
 const conditions = ['allergies', 'sleep apnea', 'heart disease', 'high cholesterol', 'asthma', 'none'];
 
-
 class UserForm extends Component {
-  constructor(props) {
-    super(props);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-  
-  handleFormSubmit = (data) => {
-    this.props.createPolicy(data);
-  }
-
   render () {
     const { handleSubmit } = this.props;
     return (
-      <form onSubmit={handleSubmit(this.props.createPolicy)}>
+      <form onSubmit={handleSubmit(this.props.createPolicy)} >
         <Field name="firstName" label="First Name" component={renderFieldInput} type="text" placeholder="first name" />
         <Field name="age" label="Age" component={renderFieldInput} type="text" placeholder="age"/>
         <Field name="location" label="location" component={renderFieldInput} type="text" placeholder="location"/>

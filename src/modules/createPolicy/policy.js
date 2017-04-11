@@ -4,10 +4,6 @@ import { createPolicy } from './policyAction';
 import UserForm from '../../components/userForm';
 
 class Policy extends Component {
-  componentWillMount() {
-    this.props.createPolicy();
-  }
-
   render() {
     return (
       <div>
@@ -23,4 +19,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createPolicy })(Policy);
+export default connect(mapStateToProps)(Policy);

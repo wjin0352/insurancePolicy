@@ -38,18 +38,17 @@ UserController.prototype.createUser = function(req, res) {
     })
   })
   .then((user) => {
-    console.log(healthConditions)
     const newPolicy = new Policy;
     newPolicy.policyCost = newPolicy.fiveYearsCost(user.age),
     newPolicy.eligibility = newPolicy.checkAge(user.age);
     newPolicy.policyType = "life insurance";
     newPolicy.policyHolder = user._id;
-    
     newPolicy.eastCoastDiscount(user.location);
 
-    for(var condition in healthConditions) {
+    for (var condition in healthConditions) {
       newPolicy.healthConditionCost(condition)
     }
+
     newPolicy.genderDiscount(newPolicy.userGender);
     newPolicy.save()
       .then((newPolicy) => {
@@ -60,15 +59,15 @@ UserController.prototype.createUser = function(req, res) {
               user,
               newPolicy
             }
-            console.log('RESULTS FROM CONTROLLER: ',results)
+            console.log('RESULTS FROM CONTROLLER: ', results)
             res.status(200).json(results);
           })
       })
-      .catch((err) => {
-        console.log(err);
-        res.status(500);
-      });
-  });
+  })
+    .catch((err) => {
+      console.log('Error creating the inital User: ',err)
+      res.status(500);
+    });
 }
 
 module.exports = UserController.prototype;

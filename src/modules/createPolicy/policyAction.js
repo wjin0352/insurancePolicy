@@ -17,6 +17,7 @@ export function createPolicy(data) {
       })
   };  
 }
+
 export function policySuccess(data) {
   return {
     type: 'CREATE_POLICY',
